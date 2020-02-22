@@ -24,7 +24,7 @@ public class MembershipController {
     private MembershipService membershipService;
 
     @GetMapping(value = "/{id}")
-    public JSONObject getMembershipById(@PathVariable Long id) {
+    public JSONObject getMembershipById(@PathVariable long id) {
         JSONObject returnJson = new JSONObject();
         Membership membership = membershipService.getMembershipById(id);
         returnJson.put("data", membership);
