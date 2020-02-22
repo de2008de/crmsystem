@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Membership {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(columnDefinition = "CHAR(250)")
     private String name;
@@ -15,7 +15,7 @@ public class Membership {
     @Column(columnDefinition = "CHAR(500)")
     private String description;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 

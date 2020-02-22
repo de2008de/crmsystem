@@ -13,10 +13,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Members")
 public class Member {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(columnDefinition = "CHAR(100)")
     private String lastName;
@@ -42,7 +41,7 @@ public class Member {
     @Column(columnDefinition = "DATE")
     private Date dateOfBirth;
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
