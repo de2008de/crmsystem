@@ -27,6 +27,9 @@ public class Member {
     private String email;
 
     @Column(columnDefinition = "INT")
+    private int prepaidInCent;
+
+    @Column(columnDefinition = "INT")
     private int points;
 
     @ManyToOne
@@ -45,7 +48,7 @@ public class Member {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -111,5 +114,17 @@ public class Member {
 
     public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
+    }
+
+    public int getPrepaidInCent() {
+        return prepaidInCent;
+    }
+
+    public void setPrepaidInCent(int prepaidInCent) {
+        this.prepaidInCent = prepaidInCent;
+    }
+
+    public void addPrepaidInCent(int amount) {
+        this.prepaidInCent += amount;
     }
 }

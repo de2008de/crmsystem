@@ -38,6 +38,7 @@ public class MemberServiceImpl implements MemberService {
         Result<Member> result = new ResultImpl<>();
         result.setSuccess(true);
         result.setMessage("New member is added");
+        result.setItem(member);
 
         return result;
     }

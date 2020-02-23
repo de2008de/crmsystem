@@ -47,9 +47,12 @@ public class MemberController {
         Result<Member> result = memberService.addMember(payload);
         JSONObject returnJson = new JSONObject();
 
+        Member member = result.getItem();
+        returnJson.put("data", member);
+
         returnJson.put("isSuccess", result.isSuccess());
         returnJson.put("message", result.getMessage());
-        
+
         return returnJson;
     }
 
