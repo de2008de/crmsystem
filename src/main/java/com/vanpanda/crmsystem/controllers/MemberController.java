@@ -3,7 +3,7 @@ package com.vanpanda.crmsystem.controllers;
 import com.alibaba.fastjson.JSONObject;
 import com.vanpanda.crmsystem.entities.Member;
 import com.vanpanda.crmsystem.services.MemberService;
-import com.vanpanda.crmsystem.wrappers.MemberServiceResult;
+import com.vanpanda.crmsystem.wrappers.Result;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,13 +26,13 @@ public class MemberController {
     
     @GetMapping(value = "/{id}")
     public JSONObject getMemberById(@PathVariable long id) {
-        MemberServiceResult result = memberService.getMemberById(id);
+        Result<Member> result = memberService.getMemberById(id);
         JSONObject returnJson = new JSONObject();
 
         returnJson.put("isSuccess", result.isSuccess());
 
         if (result.isSuccess()) {
-            Member member = result.getMember();
+            Member member = result.getItem();
             returnJson.put("data", member);
         } else {
             returnJson.put("data", null);
@@ -44,7 +44,7 @@ public class MemberController {
 
     @PostMapping
     public JSONObject addMember(@RequestBody JSONObject payload) {
-        MemberServiceResult result = memberService.addMember(payload);
+        Result<Member> result = memberService.addMember(payload);
         JSONObject returnJson = new JSONObject();
 
         returnJson.put("isSuccess", result.isSuccess());

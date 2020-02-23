@@ -4,7 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.vanpanda.crmsystem.builders.Builder;
 import com.vanpanda.crmsystem.entities.Member;
 import com.vanpanda.crmsystem.repositories.MemberRepository;
-import com.vanpanda.crmsystem.wrappers.MemberServiceResult;
+import com.vanpanda.crmsystem.wrappers.Result;
+import com.vanpanda.crmsystem.wrappers.ResultImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -22,29 +23,27 @@ public class MemberServiceImpl implements MemberService {
     @Qualifier(value = "BuilderImpl")
     private Builder builder;
 
-    public MemberServiceResult addMember(JSONObject memberParams) {
+    public Result<Member> addMember(JSONObject memberParams) {
         if (memberParams.get("id") != null) {
             memberParams.fluentRemove("id");
         }
 
-        long membershipId = -1;
         if (memberParams.get("membership") != null) {
-            membershipId = memberParams.getLong("membership");
             memberParams.fluentRemove("membership");
         }
 
         Member member = builder.buildWithParams(Member.class, memberParams);
         memberRepository.addMember(member);
-
-        MemberServiceResult result = new MemberServiceResult();
+        
+        Result<Member> result = new ResultImpl<>();
         result.setSuccess(true);
         result.setMessage("New member is added");
 
         return result;
     }
 
-    public MemberServiceResult getMemberById(Long id) {
-        MemberServiceResult result = new MemberServiceResult();
+    public Result<Member> getMemberById(Long id) {
+        Result<Member> result = new ResultImpl<>();
 
         if (id <= 0) {
             result.setSuccess(false);
@@ -58,7 +57,7 @@ public class MemberServiceImpl implements MemberService {
             result.setMessage("cannot find a member");
             result.setSuccess(false);
         } else {
-            result.setMember(member);
+            result.setItem(member);
             result.setSuccess(true);
         }
 
