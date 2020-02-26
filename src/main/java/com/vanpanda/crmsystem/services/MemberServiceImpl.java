@@ -47,21 +47,26 @@ public class MemberServiceImpl implements MemberService {
         Result<Member> result = new ResultImpl<>();
 
         if (id <= 0) {
+
             result.setSuccess(false);
             result.setMessage("invalid id");
+            
             return result;
         }
 
         Member member = memberRepository.getMemberById(id);
 
         if (member == null) {
+
             result.setMessage("cannot find a member");
             result.setSuccess(false);
-        } else {
-            result.setItem(member);
-            result.setSuccess(true);
-        }
 
+            return result;
+        }
+        
+        result.setItem(member);
+        result.setSuccess(true);
+        
         return result;
     }
 }
